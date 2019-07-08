@@ -14,6 +14,8 @@ const config: NuxtConfiguration = {
     link: [],
   },
 
+  plugins: ['@/plugins/functionApi.ts'],
+
   devModules: ['@nuxtjs/tailwindcss'],
 };
 
