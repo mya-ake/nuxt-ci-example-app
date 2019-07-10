@@ -1,12 +1,16 @@
 import { value } from 'vue-function-api';
 
-export interface FormValues {
-  [name: string]: string | number | boolean;
+type FormValue = string | number | boolean;
+
+export type FormValues<T> = { [P in keyof T]: T[P] } extends {
+  [k: string]: FormValue;
 }
+  ? { [P in keyof T]: T[P] }
+  : never;
 
-type OnSubmit<FV extends FormValues> = (form: FV) => void | Promise<void>;
+export type OnSubmit<FV> = (form: FV) => void | Promise<void>;
 
-export function useForm<FV extends FormValues>(
+export function useForm<FV extends FormValues<FV>>(
   formValues: FV,
   onSubmitFunction: OnSubmit<FV>,
 ) {
