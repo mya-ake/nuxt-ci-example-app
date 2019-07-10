@@ -30,10 +30,9 @@ import { BaseInput } from '@/components/basics';
 import { useForm, useMessage } from '@/hooks';
 
 const createFormValues = (
-  initialValues?: SignInFormType.SignInFormValues,
+  initialValues: SignInFormType.SignInFormInitialValues,
 ): SignInFormType.SignInFormValues => {
-  const _initialValues = initialValues || {};
-  return { id: '', password: '', ..._initialValues };
+  return { id: '', password: '', ...initialValues };
 };
 
 export default createComponent({
@@ -48,7 +47,10 @@ export default createComponent({
 
   setup(props) {
     const { submit, initialValues } = props;
-    const { form, onSubmit } = useForm(createFormValues(initialValues), submit);
+    const { form, onSubmit } = useForm(
+      createFormValues(initialValues || {}),
+      submit,
+    );
     const { message, hasMessage } = useMessage();
 
     return {

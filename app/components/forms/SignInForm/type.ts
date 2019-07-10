@@ -6,8 +6,10 @@ export namespace SignInFormType {
     password: string;
   }
 
+  export type SignInFormInitialValues = Optional<SignInFormValues>;
+
   export type Props = {
-    initialValues?: Optional<SignInFormValues>;
+    initialValues?: SignInFormInitialValues;
     submit: OnSubmit<SignInFormValues>;
   };
 }
