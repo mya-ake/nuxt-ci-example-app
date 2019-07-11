@@ -1,10 +1,11 @@
+import { Optional } from '@/types/utils';
 import { OnSubmit } from '@/hooks';
 
 export namespace SignInFormType {
-  export interface SignInFormValues {
+  export type SignInFormValues = {
     id: string;
     password: string;
-  }
+  };
 
   export type SignInFormInitialValues = Optional<SignInFormValues>;
 
