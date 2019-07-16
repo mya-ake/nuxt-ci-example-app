@@ -14,7 +14,9 @@ const config: NuxtConfiguration = {
     link: [],
   },
 
-  plugins: ['@/plugins/functionApi.ts'],
+  modules: [['@nuxtjs/dotenv', { path: './', filename: '.env' }]],
+
+  plugins: ['@/plugins/functionApi.ts', '@/plugins/http.ts'],
 
   devModules: ['@nuxtjs/tailwindcss'],
 };

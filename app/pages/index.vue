@@ -8,9 +8,20 @@
 import { createComponent, watch } from 'vue-function-api';
 import { SignInForm, SignInFormType } from '@/components/forms';
 import { OnSubmit } from '@/hooks';
+import { IHttp } from '../lib/http';
 
-const submit: OnSubmit<SignInFormType.SignInFormValues> = formValues => {
-  console.log(formValues);
+const createSubmit = (
+  http: IHttp,
+): OnSubmit<SignInFormType.SignInFormValues> => {
+  return async formValues => {
+    console.log(formValues);
+    const response = await http.request({
+      url: 'users/login?test=a',
+      method: 'post',
+      body: formValues,
+    });
+    console.log(response);
+  };
 };
 
 export default createComponent({
@@ -18,9 +29,10 @@ export default createComponent({
     SignInForm,
   },
 
-  setup() {
+  setup(_, ctx) {
+    const { $_http } = ctx.root;
     const signInFormProps: SignInFormType.Props = {
-      submit,
+      submit: createSubmit($_http),
     };
     return {
       signInFormProps,
